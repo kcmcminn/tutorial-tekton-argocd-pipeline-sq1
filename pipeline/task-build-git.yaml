@@ -19,10 +19,11 @@ spec:
         default: "false"
       - name: GIT_REPOSITORY
         description: Git repository containing manifest files to update
+        default: https://github.com/kcmcminn/tekton-argocd-sq1-code
       - name: GIT_EMAIL
-        default: pipeline@example.com
+        default: kcmcminn@gmail.com
       - name: GIT_NAME
-        default: Pipeline Operator
+        default: Kristina McMinn
       - name: GIT_MANIFEST_DIR
         default: yamls/ocp
       - name: TOOL_IMAGE
