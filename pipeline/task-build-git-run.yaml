@@ -1,0 +1,36 @@
+
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: squad1-task-run
+spec:
+  taskRef:
+    name: build-git
+  inputs:
+    params:
+    - name: BUILDER_IMAGE
+      value: quay.io/buildah/stable:v1.11.0
+    - name: DOCKERFILE
+      value: ./Dockerfile
+    - name: CONTEXT
+      value: .
+    - name: TLSVERIFY
+      value: "false"
+    - name: GIT_REPOSITORY
+      value: github.com/kcmcminn/tekton-argocd-sq1-infra
+    - name: GIT_EMAIL
+      value: kcmcminn@gmail.com
+    - name: GIT_NAME
+      value: Kristina McMinn
+    - name: GIT_MANIFEST_DIR
+      value: yamls/ocp
+    - name: TOOL_IMAGE
+      value: docker.io/csantanapr/helm-kubectl-curl-git-jq-yq
+    resources:
+      - name: image
+        resourceRef:
+          name: image
+      - name: source
+        resourceRef:
+          name: source
+     

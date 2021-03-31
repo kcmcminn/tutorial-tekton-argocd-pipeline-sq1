@@ -19,7 +19,7 @@ spec:
         default: "false"
       - name: GIT_REPOSITORY
         description: Git repository containing manifest files to update
-        default: https://github.com/kcmcminn/tekton-argocd-sq1-code
+        default: github.com/kcmcminn/tekton-argocd-sq1-infra
       - name: GIT_EMAIL
         default: kcmcminn@gmail.com
       - name: GIT_NAME
@@ -85,9 +85,10 @@ spec:
           source /workspace/env-config
           git config --global user.email "$(inputs.params.GIT_EMAIL)"
           git config --global user.name "$(inputs.params.GIT_NAME)"
+          echo git username is $GIT_USERNAME 
           git clone --branch master --depth 1 https://${GIT_USERNAME}:${GIT_TOKEN}@$(inputs.params.GIT_REPOSITORY) repo
+          ls -R
           cd "repo/$(inputs.params.GIT_MANIFEST_DIR)"
-          ls -l
           echo old value:
           cat deployment.yaml | yq r - 'spec.template.spec.containers[0].image'
           echo replacing with new value:
